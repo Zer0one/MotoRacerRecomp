@@ -347,6 +347,16 @@ constexpr uint32_t SHOW_COUNTER = 0x4f0dc8, COUNTER_TYPE = 0x4f0dcc;
 constexpr int32_t kJoyBack = 6;
 uint64_t race_hud_ms = 0;
 
+// The device may keep its Z-buffer while Options > D3D is OFF. HUD/model
+// loading and drawing must then use software depths, without changing the
+// device flag itself (the player can switch back to D3D).
+extern "C" void game_hook_software_z_eax(void) {
+    if (RD32(D3D_OFF)) R.eax = 0;
+}
+extern "C" void game_hook_software_z_ecx(void) {
+    if (RD32(D3D_OFF)) R.ecx = 0;
+}
+
 extern "C" void game_hook_counter(void) {
     race_hud_ms = SDL_GetTicks();
     static uint32_t logged = ~0u;

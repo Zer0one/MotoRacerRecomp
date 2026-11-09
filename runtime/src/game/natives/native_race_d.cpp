@@ -153,7 +153,7 @@ void quad() {
     const uint32_t sp = R.esp;
     auto arg = [&](int i) { return RD32A(sp + 4 + 4 * static_cast<uint32_t>(i)); };
     uint32_t za = 0x45000000, zb = 0x3a000000;   // float bits stored into each vertex
-    if (RD32A(Z_ON)) {
+    if (RD32A(Z_ON) && !RD32A(0x4dc070)) {   // Options > D3D: OFF uses software depths
         if (arg(6) == 1) za = 0, zb = 0x3f800000;
         else if (RD32A(Z_RAW)) za = 0x497fff00, zb = 0x35800080;
         else za = 0x477f7800, zb = 0x37804424;

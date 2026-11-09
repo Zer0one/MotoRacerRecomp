@@ -279,6 +279,8 @@ void game_hook_bike_lod(void);
 void game_hook_input_loaded(void);
 void game_hook_band(void);
 void game_hook_counter(void);
+void game_hook_software_z_eax(void);
+void game_hook_software_z_ecx(void);
 void game_hook_lean(void);
 void game_hook_options_init(void);
 void game_hook_button_unpacked(void);

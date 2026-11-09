@@ -91,6 +91,15 @@ GAME_HOOKS = {
     # Race HUD, speedometer (0x484810): runs every race frame just before the "ShowCounter" test;
     # the runtime knows a race is on (gamepad Back cycles the speedometer like F7).
     0x484833: "game_hook_counter",
+    # Z-buffer-dependent HUD/model depth setup: these hooks run just after the
+    # device Z flag was read. D3D OFF needs software depths even with a device.
+    0x40F6C7: "game_hook_software_z_eax",
+    0x40F998: "game_hook_software_z_ecx",
+    0x47B9CE: "game_hook_software_z_eax",
+    0x47BB97: "game_hook_software_z_eax",
+    0x485517: "game_hook_software_z_eax",
+    0x485ED5: "game_hook_software_z_eax",
+    0x486568: "game_hook_software_z_eax",
     # Player bike lean (0x469c60): [esp+0x10] is the frame-time divisor of the lean, max(smoothed
     # frame time, 20 ms); the runtime uses this frame's time instead (correct at high frame rates).
     0x46AC41: "game_hook_lean",
